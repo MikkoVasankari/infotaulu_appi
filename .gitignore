@@ -1,28 +1,31 @@
 # Logs
-/ts_info/logs
-/ts_info/*.log
-/ts_info/npm-debug.log*
-/ts_info/yarn-debug.log*
-/ts_info/yarn-error.log*
-/ts_info/pnpm-debug.log*
-/ts_info/lerna-debug.log*
+ts_info/logs
+ts_info/*.log
+ts_info/npm-debug.log*
+ts_info/yarn-debug.log*
+ts_info/yarn-error.log*
+ts_info/pnpm-debug.log*
+ts_info/lerna-debug.log*
 
-/ts_info/node_modules
-/ts_info/dist
-/ts_info/dist-ssr
-/ts_info/*.local
+ts_info/node_modules
+ts_info/dist
+ts_info/dist-ssr
+ts_info/*.local
 
 # Editor directories and files
-/ts_info/.vscode/*
-/ts_info/!.vscode/extensions.json
-/ts_info/.idea
-/ts_info/.DS_Store
-/ts_info/*.suo
-/ts_info/*.ntvs*
-/ts_info/*.njsproj
-/ts_info/*.sln
-/ts_info/*.sw?
+ts_info/.vscode/*
+ts_info/!.vscode/extensions.json
+ts_info/.idea
+ts_info/.DS_Store
+ts_info/*.suo
+ts_info/*.ntvs*
+ts_info/*.njsproj
+ts_info/*.sln
+ts_info/*.sw?
 
-/bäkkäri/node_modules
+ts_info/public
 
-/bäkkäri/db.txt
+
+bäkkäri/node_modules
+
+bäkkäri/db.txt

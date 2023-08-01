@@ -1,0 +1,12 @@
+
+create database spot_price;
+
+\c spot_price
+
+CREATE TABLE hours (
+  ID SERIAL PRIMARY KEY,
+  Rank INTEGER,
+  DateTime VARCHAR(100),
+  PriceNoTax decimal,
+  PriceWithTax decimal
+);

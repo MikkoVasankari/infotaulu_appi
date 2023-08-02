@@ -107,3 +107,10 @@ button {
     background-color: #0f0f0f69;
   }
 }
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 40vh;
+  width: 40vw;
+}

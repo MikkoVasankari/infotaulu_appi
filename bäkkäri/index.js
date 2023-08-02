@@ -50,7 +50,7 @@ async function fetchspot_pricedata() {
         if (error) {
           pool.query("Drop table hours", (error, results) => {
             pool.query(
-              "CREATE TABLE hours (ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime VARCHAR(100),PriceNoTax decimal,PriceWithTax decimal);"
+              "CREATE TABLE hours(ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime VARCHAR(100),PriceNoTax decimal,PriceWithTax decimal);"
             );
             pool.query(
               "INSERT into hours(ID,Rank,datetime,pricenotax,pricewithtax) values($1,$2,$3,$4,$5)",

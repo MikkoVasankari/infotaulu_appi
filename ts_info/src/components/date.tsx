@@ -12,7 +12,7 @@ function Datetime() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="clock-container">
       <p> {date.toTimeString()}</p>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -16,11 +17,35 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
 export const options = {
   responsive: true,
+  scales: {
+    y: {
+      ticks: { color: "#fff", beginAtZero: true },
+    },
+    x: {
+      ticks: { color: "#fff", beginAtZero: true },
+    },
+  },
+  datalabels: {
+    display: true,
+    color: "white",
+    anchor: "end",
+    labels: {
+      padding: { top: 1 },
+      title: {
+        font: {
+          weight: "bold",
+          size: 18,
+        },
+      },
+    },
+  },
+
   plugins: {
     legend: {
       display: false,
@@ -30,10 +55,9 @@ export const options = {
       display: false,
       text: "Chart.js Bar Chart",
     },
-    subtitle: {
-      display: true,
-      text: 'Custom Chart Subtitle'
-  }
+    decimation: {
+      enabled: false,
+    },
   },
 };
 
@@ -59,39 +83,44 @@ function Spot_price() {
   }, []);
 
   const labels = [
-    "00",
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
+    "00:00",
+    "01:00",
+    "02:00",
+    "03:00",
+    "04:00",
+    "05:00",
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
   ];
 
   const data = {
     labels,
     datasets: [
       {
-        label: "",
-        data: spot_pricedata.map((item) => item.pricewithtax),
+        label: "snt/kWh",
+        data: spot_pricedata.map((item) =>
+          (item.pricewithtax * 100).toFixed(2)
+        ),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        datalabels: {
+          color: "white",
+        },
       },
     ],
   };
@@ -105,21 +134,5 @@ function Spot_price() {
   );
 }
 
-/*
-
-      <p>
-        {spot_pricedata.length > 0
-          ? spot_pricedata[0].pricewithtax
-          : "Loading..."}
-      </p>
-
-
-      {spot_pricedata?.map((item) => (
-        <div key={item.rank}>
-          <li key={item.rank}>{item.pricewithtax}</li>
-        </div>
-      ))}
-
-*/
 
 export default Spot_price;

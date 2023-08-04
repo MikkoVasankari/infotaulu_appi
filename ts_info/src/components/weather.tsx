@@ -53,9 +53,10 @@ function Weather() {
 
   return (
     <div>
+      <div className={"weather-container"}>
       <p> {locationData?.results[0].name}</p>
       <p> {weatherData?.current_weather.temperature} °C</p>
-      
+      </div>
     </div>
   );
 }

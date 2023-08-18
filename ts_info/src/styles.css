@@ -115,12 +115,11 @@ button {
 }
 
 .weather-container {
-
+  
 }
 
 .chart-container {
-  position: relative;
-  margin: auto;
-  height: 30vh;
-  width: 30vw;
+  position: absolute;
+  height: 60vh;
+  width: 80vw;
 }

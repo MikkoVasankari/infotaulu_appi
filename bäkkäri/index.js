@@ -1,18 +1,29 @@
 const express = require("express");
 const app = express();
 const port = 42070;
-var cors = require("cors");
-const Pool = require("pg").Pool;
+const cors = require("cors");
+const { Pool } = require("pg");
 
 app.use(cors());
 
-app.get("/", (request, response) => {
-  response.json({ info: "Node.js, Express, and Postgres API" });
+app.get("/prices", (request, response) => {
+  pool.query("SELECT * FROM hours", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   fetchspot_pricedata();
   console.log(`App running on port ${port}.`);
+
+  process.on("SIGINT", async () => {
+    await dropTable();
+    console.log(`Shutting server on port ${port}.`);
+    process.exit(0);
+  });
 });
 
 const pool = new Pool({
@@ -27,33 +38,35 @@ async function fetchspot_pricedata() {
   const response = await fetch("https://api.spot-hinta.fi/Today?region=FI");
   const jsonData = await response.json();
 
-  pool.query(
-    "CREATE TABLE IF NOT EXISTS hours(ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime VARCHAR(100),PriceNoTax decimal,PriceWithTax decimal);"
-  );
+  await createTable();
 
-  for (let i = 0; i < jsonData.length; i++) {
-    pool.query(
-      "INSERT into hours(ID,Rank,datetime,pricenotax,pricewithtax) values($1,$2,$3,$4,$5)",
-      [
-        i,
-        jsonData[i].Rank,
-        jsonData[i].DateTime,
-        jsonData[i].PriceNoTax,
-        jsonData[i].PriceWithTax,
-      ],
-      (error, results) => {
-        if (error) {
-        }
-      }
-    );
+  for (const item of jsonData) {
+    const query = "INSERT into hours(Rank,DateTime,PriceNoTax,PriceWithTax) values($1,$2,$3,$4)" ;
+    const values = [item.Rank, item.DateTime, item.PriceNoTax, item.PriceWithTax];
+
+    await pool.query(query, values);
+    //console.log('Inserted item:', item);
+    
   }
+} 
+
+async function dropTable() {
+  await pool.query(`DROP table hours`);
+  console.log(`Table dropped.`);
 }
 
-app.get("/prices", (request, response) => {
-  pool.query("SELECT * FROM hours", (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
+async function createTable() {
+  await pool.query("CREATE TABLE IF NOT EXISTS hours(ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime TIMESTAMP,PriceNoTax decimal,PriceWithTax decimal);");
+  console.log(`Table Created.`);
+}
+
+
+// On shutdown
+/*
+process.on("SIGINT", async () => {
+  await dropTable();
+  console.log(`Shutting server on port ${port}.`);
+  process.exit(0);
 });
+
+*/

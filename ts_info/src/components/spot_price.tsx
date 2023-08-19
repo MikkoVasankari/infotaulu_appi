@@ -23,14 +23,20 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: true,
   scales: {
     y: {
       grid: { color: "#fff", lineWidth: 0.5 },
       ticks: { color: "#fff", beginAtZero: true },
     },
     x: {
-      grid: {},
-      ticks: { color: "#fff", beginAtZero: true },
+      grid: {
+        offset: false,
+        borderColor: "grey",
+        tickColor: "grey",
+        drawTicks: true,
+      },
+      ticks: {display:true, color: "#fff", beginAtZero: true },
     },
   },
 

@@ -35,7 +35,7 @@ const pool = new Pool({
 });
 
 async function fetchspot_pricedata() {
-  const response = await fetch("https://api.spot-hinta.fi/Today?region=FI");
+  const response = await fetch("https://api.spot-hinta.fi/TodayAndDayForward?region=FI");
   const jsonData = await response.json();
 
   await createTable();

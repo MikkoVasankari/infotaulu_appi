@@ -25,18 +25,20 @@ export const options = {
   responsive: true,
   scales: {
     y: {
+      grid: { color: "#fff", lineWidth: 0.5 },
       ticks: { color: "#fff", beginAtZero: true },
     },
     x: {
+      grid: {},
       ticks: { color: "#fff", beginAtZero: true },
     },
   },
+
   datalabels: {
     display: true,
     color: "white",
     anchor: "end",
     labels: {
-      padding: { top: 1 },
       title: {
         font: {
           weight: "bold",
@@ -107,12 +109,36 @@ function Spot_price() {
     "21:00",
     "22:00",
     "23:00",
+    "00:00",
+    "01:00",
+    "02:00",
+    "03:00",
+    "04:00",
+    "05:00",
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
   ];
 
   const data = {
     labels,
     datasets: [
-      {
+      { 
         label: "snt/kWh",
         data: spot_pricedata.map((item) =>
           (item.pricewithtax * 100).toFixed(2)
@@ -133,6 +159,5 @@ function Spot_price() {
     </div>
   );
 }
-
 
 export default Spot_price;

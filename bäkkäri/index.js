@@ -36,7 +36,6 @@ async function fetchspot_pricedata() {
     const values = [item.Rank, item.DateTime, item.PriceNoTax, item.PriceWithTax];
 
     await pool.query(query, values);
-    //console.log('Inserted item:', item);
     
   }
 } 
@@ -53,7 +52,6 @@ async function createTable() {
 
 app.get("/prices", (request, response) => {
   pool.query("select * from hours;", (error, results) => {
-    console.log(results.rows);
     if (error) {
       throw error;
     }

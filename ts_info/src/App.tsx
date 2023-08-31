@@ -1,4 +1,3 @@
-// import reactLogo from "./assets/react.svg";
 import "./App.css";
 import Datetime from "./components/date";
 import Weather from "./components/weather";

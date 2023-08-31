@@ -6,15 +6,6 @@ const { Pool } = require("pg");
 
 app.use(cors());
 
-app.get("/prices", (request, response) => {
-  pool.query("SELECT * FROM hours", (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
-});
-
 app.listen(port, async () => {
   fetchspot_pricedata();
   console.log(`App running on port ${port}.`);
@@ -41,7 +32,7 @@ async function fetchspot_pricedata() {
   await createTable();
 
   for (const item of jsonData) {
-    const query = "INSERT into hours(Rank,DateTime,PriceNoTax,PriceWithTax) values($1,$2,$3,$4)" ;
+    const query = "INSERT into hours(Rank,DateTime,PriceNoTax,PriceWithTax) values($1,$2,$3,$4)";
     const values = [item.Rank, item.DateTime, item.PriceNoTax, item.PriceWithTax];
 
     await pool.query(query, values);
@@ -56,9 +47,19 @@ async function dropTable() {
 }
 
 async function createTable() {
-  await pool.query("CREATE TABLE IF NOT EXISTS hours(ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime TIMESTAMP,PriceNoTax decimal,PriceWithTax decimal);");
+  await pool.query("CREATE TABLE IF NOT EXISTS hours(ID SERIAL PRIMARY KEY,Rank INTEGER,DateTime varchar(50),PriceNoTax decimal,PriceWithTax decimal);");
   console.log(`Table Created.`);
 }
+
+app.get("/prices", (request, response) => {
+  pool.query("select * from hours;", (error, results) => {
+    console.log(results.rows);
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+});
 
 
 // On shutdown

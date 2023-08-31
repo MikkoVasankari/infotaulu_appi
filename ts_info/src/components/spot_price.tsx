@@ -88,74 +88,31 @@ function Spot_price() {
 
   useEffect(() => {
     fetchspot_pricedata();
+
   }, []);
 
-  const labels = [
-    "00:00",
-    "01:00",
-    "02:00",
-    "03:00",
-    "04:00",
-    "05:00",
-    "06:00",
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-    "23:00",
-    "00:00",
-    "01:00",
-    "02:00",
-    "03:00",
-    "04:00",
-    "05:00",
-    "06:00",
-    "07:00",
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-    "23:00",
-  ];
-
+  let labels:string[] = [];
+  for (let item in spot_pricedata) {
+    labels.push(spot_pricedata[item].datetime.slice(11,16))
+  }
+  
   const data = {
     labels,
     datasets: [
       { 
         label: "snt/kWh",
         data: spot_pricedata.map((item) =>
-          (item.pricewithtax * 100).toFixed(2)
+          (item.pricewithtax * 100).toFixed(1)
         ),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderWidth: 0.75,
+        borderColor: "rgba(255, 255, 255, 0.4)",
+        backgroundColor: "rgba(82, 82, 82, 0.2)",
         datalabels: {
           color: "white",
         },
       },
     ],
-  };
+  }; 
 
   return (
     <div>
@@ -165,5 +122,8 @@ function Spot_price() {
     </div>
   );
 }
+
+
+
 
 export default Spot_price;

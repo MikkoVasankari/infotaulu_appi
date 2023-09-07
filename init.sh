@@ -1,3 +1,3 @@
 #!/bin/bash
-	node bäkkäri/ & 
+	node bakkari/ & 
 	cd ts_info/ && pnpm tauri dev

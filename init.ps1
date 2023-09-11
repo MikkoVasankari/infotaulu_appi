@@ -1,9 +1,11 @@
 
+# Create check for node and pnpm/npm 
+
+
 $ChocoInstalled = $false
 if (Get-Command choco.exe -ErrorAction SilentlyContinue) {
     $ChocoInstalled = $true
     Write-Output "Chocolatey installed"
-    Write-Output ""
 } else {
     Write-Output "Chocolatey installation not found"
     Write-Output 'You install it at "https://chocolatey.org/install"'

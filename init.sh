@@ -3,6 +3,7 @@
 nodeInstalled="false"
 pnpmInstalled="false"
 npmInstalled="false"
+psqlInstalled="false"
 
 if ! command -v npm > /dev/null;
 then
@@ -29,6 +30,16 @@ then
 else 
 	pnpmInstalled="true"
 fi
+
+
+if ! command -v psql > /dev/null;
+then
+	echo " postgres installation not found "
+	exit
+else 
+	psqlInstalled="true"
+fi
+
 
 
 if nodeInstalled=="true" && pnpmInstalled=="true" && npmInstalled=="true"

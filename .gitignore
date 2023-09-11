@@ -26,8 +26,10 @@ ts_info/*.sw?
 ts_info/public
 
 
-bäkkäri/node_modules
+bakkari/node_modules
 
-bäkkäri/db.txt
+bakkari/db.txt
+bakkari/.env
+
 
 postgresMuistilappu.txt

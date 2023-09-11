@@ -3,6 +3,7 @@ const app = express();
 const port = 42070;
 const cors = require("cors");
 const { Pool } = require("pg");
+require('dotenv').config();
 
 app.use(cors());
 
@@ -18,11 +19,11 @@ app.listen(port, async () => {
 });
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "spot_price",
-  password: "postgres",
-  port: 5432,
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  port: process.env.DATABASE_PORT,
 });
 
 async function fetchspot_pricedata() {

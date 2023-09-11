@@ -19,6 +19,11 @@ if (Get-Command postgres.exe -ErrorAction SilentlyContinue){
     Write-Output "try running this script again after it completes"
 }
 
+Set-Location ".\bakkari"; npm install
+
+Set-Location ".."
+
+
 
 if (("true" -eq $PostgresInstalled) -and ("true" -eq $ChocoInstalled)) {
 

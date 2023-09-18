@@ -14,6 +14,7 @@ function Datetime() {
   return (
     <div className="clock-container">
       <p> {date.toTimeString()}</p>
+      <p> {date.toDateString()}</p>
     </div>
   );
 }

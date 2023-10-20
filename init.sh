@@ -41,10 +41,8 @@ else
 fi
 
 
-
 if nodeInstalled=="true" && pnpmInstalled=="true" && npmInstalled=="true"
 then
-	cd bakkari/ && npm install 
-	node index.js &  cd ..
-	cd ts_info/ && pnpm tauri dev
+	cd ts_info/ && pnpm tauri dev &
+	cd bakkari/ && npm install && node index.js
 fi
